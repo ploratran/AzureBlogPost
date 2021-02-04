@@ -6,6 +6,7 @@ This project is a Python web application built using Flask. The user can log in 
 ## Table of Contents:
 
 1. [Azure Portal](#azure-portal)
+2. [Getting started](#getting-started)
 2. [Dependencies](#dependencies)
 3. [Troubleshooting](#troubleshooting)
 1. [Udacity Requirements](#udacity-requirements)
@@ -53,7 +54,7 @@ Firewall rules:
 <img src="screenshots/sql.png" width="600" height="350"> 
 
 
-### ```Storage Account``` with ```Blob Container```: 
+### ```Storage Account``` with ```Blob Container:``` 
 
 1. On Azure Portal, find ```Storage Account``` > ```Create```
 2. Fill in information:
@@ -81,7 +82,7 @@ Blob storage:
 5. Click ```Review + create``` > ```Create```
 
 
-### ```Blob Container```: 
+### ```Blob Container:```
 
 1. On ```Storage account```, look on the left hand side for ```Blob Service``` > ```Containers```
 2. Click ```+ Container``` to create a Blob Container.
@@ -95,6 +96,60 @@ Public access level: Container (anonymous read access for containers and blobs)
 
 <img src="screenshots/blob-endpoint.png" width="600" height="350"> 
 
+### ```OAuth2 with MSAL:```
+
+1. On Azure portal, navigate to ```Azure Active Directory``` > ```App registrations```
+2. On the left panel, look for ```Authentication``` > ```Add a platform```
+2. Choose ```Web``` for ```Configure platforms```, then fill in inforamtion:
+```
+Redirect URIs: https://localhost:5555/getAToken
+Logout URL: https://localhost:5555/login
+```
+
+<img src="screenshots/redirecturl.png" width="600" height="350"> 
+
+
+### Register app in ```Azure Active Directory:``` 
+
+Azure Active Directory is Microsoft’s solution for single sign-on (SSO) and multi-factor authentication (MFA). Using this in combination with the Microsoft Authentication Library (MSAL) to use "Sign in with Microsoft" buttons in an app, although it can be used more broadly for identity management purposes within an organization. The "tenant" in Azure AD is usually equivalent to an organization.
+
+1. On Azure portal, navigate to ```Azure Active Directory```, then hit ```Create```
+2. Create a new tenant (if not exists) as below: 
+
+<img src="screenshots/tenant.png" width="600" height="350"> 
+
+3. On the left panel, click on ```App registrations```, and fill in data as picture below: 
+```
+Name: bertelsmann-azure
+Supported account types: Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal ....
+Redirect URI: /getAToken
+```
+
+4. Hit ```Create``` to register new application
+
+5. On the left panel, click ```Certificates & secrets``` > ```New client secret```. Save this new Client Secret on ```config.py```
+
+6. After successfully registered the app, look on the left panel for ```Authentication```. Make sure Redirect URIs and Front-channel logout URL have the correct URIs as below: 
+
+<img src="screenshots/redirecturl.png" width="600" height="350"> 
+
+
+## Getting Started:
+
+1. Install the app locally by running:
+```
+$ pip install -r requirements.txt
+$ python3 application.py
+```
+
+2. Open browser and navigate to ```https://localhost:5555```
+
+3. Signin using ```Microsoft OAuth2 with MSAL```, the application home page should look like below: 
+
+
+<img src="screenshots/home.png" width="600" height="350"> 
+
+<img src="screenshots/post.png" width="600" height="350"> 
 
 ## Dependencies
 
@@ -133,19 +188,19 @@ You are expected to do the following to complete this project:
     - [x] Provide a screenshot of the populated tables as detailed further below.
 3. [x] Create a Storage Container in Azure for `images` to be stored in a container.
     - [x] Provide a screenshot of the storage endpoint URL as detailed further below.
-4. Add functionality to the Sign In With Microsoft button. 
+4. [x] Add functionality to the Sign In With Microsoft button. 
     - This will require completing TODOs in `views.py` with the `msal` library, along with appropriate registration in Azure Active Directory.
 5. Choose to use either a VM or App Service to deploy the FlaskWebProject to Azure. Complete the analysis template in `WRITEUP.md` (or include in the README) to compare the two options, as well as detail your reasoning behind choosing one or the other. Once you have made your choice, go through with deployment.
 6. Add logging for whether users successfully or unsuccessfully logged in.
     - This will require completing TODOs in `__init__.py`, as well as adding logging where desired in `views.py`.
-7. To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
+7. [x] To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
 	- Title: "Hello World!"
 	- Author: "Jane Doe"
 	- Body: "My name is Jane Doe and this is my first article!"
 	- Upload an image of your choice. Must be either a .png or .jpg.
    After saving, click back on the article you created and provide a screenshot proving that it was created successfully. Please also make sure the URL is present in the screenshot.
 8. Log into the Azure Portal, go to your Resource Group, and provide a screenshot including all of the resources that were created to complete this project. (see sample screenshot in "example_images" folder)
-9. Take a screenshot of the Redirect URIs entered for your registered app, related to the MS Login button.
+9. [x] Take a screenshot of the Redirect URIs entered for your registered app, related to the MS Login button.
 10. Take a screenshot of your logs (can be from the Log stream in Azure) showing logging from an attempt to sign in with an invalid login, as well as a valid login.
 
 ### example_images Folder

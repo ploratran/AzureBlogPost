@@ -66,3 +66,14 @@ class Post(db.Model):
         if new:
             db.session.add(self)
         db.session.commit()
+
+    # def delete_post(self, id):
+    #     self.id = id
+    #     try:
+    #         postQuery = Post.query.get_or_404(id)
+    #         db.session.delete(postQuery)
+
+    #     except Exception:
+    #         flash("Failed because: " + Exception)
+
+    #     db.session.commit()
