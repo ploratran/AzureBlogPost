@@ -58,8 +58,13 @@ def post(id):
         form=form
     )
 
+# Add logging for whether users successfully or unsuccessfully logged in:
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
+    # make a variable for log error:
+    log = ""
+
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -67,11 +72,21 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
+
+            # Log warning when invalid user attemps to log in:
+            log = "warning"
+            app.logger.warning("Invalid user attemps to login")
+
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
+
+            # Log infor for successful login attempt:
+            log = "info"
+            app.logger.info("Successfully loggedi in!")
+
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])

@@ -190,10 +190,10 @@ You are expected to do the following to complete this project:
     - [x] Provide a screenshot of the storage endpoint URL as detailed further below.
 4. [x] Add functionality to the Sign In With Microsoft button. 
     - This will require completing TODOs in `views.py` with the `msal` library, along with appropriate registration in Azure Active Directory.
-5. Choose to use either a VM or App Service to deploy the FlaskWebProject to Azure. Complete the analysis template in `WRITEUP.md` (or include in the README) to compare the two options, as well as detail your reasoning behind choosing one or the other. Once you have made your choice, go through with deployment.
-6. Add logging for whether users successfully or unsuccessfully logged in.
-    - This will require completing TODOs in `__init__.py`, as well as adding logging where desired in `views.py`.
-7. [x] To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
+5. [x] Choose to use either a VM or App Service to deploy the FlaskWebProject to Azure. Complete the analysis template in `WRITEUP.md` (or include in the README) to compare the two options, as well as detail your reasoning behind choosing one or the other. Once you have made your choice, go through with deployment.
+6. [x] Add logging for whether users successfully or unsuccessfully logged in.
+    - [x] This will require completing TODOs in `__init__.py`, as well as adding logging where desired in `views.py`.
+7. To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
 	- Title: "Hello World!"
 	- Author: "Jane Doe"
 	- Body: "My name is Jane Doe and this is my first article!"
