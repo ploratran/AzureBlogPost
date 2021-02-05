@@ -7,6 +7,14 @@ This project is a Python web application built using Flask. The user can log in 
 
 1. [Azure Portal](#azure-portal)
 2. [Getting started](#getting-started)
+    * [Resource Group](#resource-group)
+    * [Azure SQL Database](#azure-sql-database)
+    * [Storage Account](#storage-account)
+    * [Blob Container](#blob-container)
+    * [OAuth2 with MSAL](#oauth2-with-msal)
+    * [Azure Active Directory](#register-app-in-azure-active-directory)
+    * [Monitoring and Logging in Azure](#monitoring-and-logging-in-azure)
+    * [Deploy App with App Service](#deploy-app-with-app-service)
 2. [Dependencies](#dependencies)
 3. [Troubleshooting](#troubleshooting)
 1. [Udacity Requirements](#udacity-requirements)
@@ -54,7 +62,7 @@ Firewall rules:
 <img src="screenshots/sql.png" width="600" height="350"> 
 
 
-### ```Storage Account``` with ```Blob Container:``` 
+### ```Storage Account:```
 
 1. On Azure Portal, find ```Storage Account``` > ```Create```
 2. Fill in information:
@@ -133,6 +141,64 @@ Redirect URI: /getAToken
 
 <img src="screenshots/redirecturl.png" width="600" height="350"> 
 
+### ```Monitoring and Logging in Azure:```
+
+Flask doesn't output regular print statements as you'd see in other Python apps. However, the logger contained within a Flask app does output to sys.stderr. Flask apps actually have this logger by default, and it uses the logging library from the Python standard library. 
+
+1. In ```__init__.py``` the logging level to warning, it can be done as follows :
+```
+app.logger.setLevel(logging.WARNING)
+```
+
+2. Update the stream handler for the logger to only pay attention to warnings and above:
+```
+streamHandler = logging.StreamHandler()
+streamHandler.setLevel(logging.WARNING)
+app.logger.addHandler(streamHandler)
+```
+3. Create a new ```Storage Account``` to store log streams in Azure portal. Go back to [Storage Account](#storage-account) section and fill with the following information: 
+
+```
+Subscription: Azure for Students
+Resource group: azure-resourcegroup
+Storage account name: loggin123
+Performance: Standard
+Account kind: StorageV2 (general purpose v2)
+Replication: leave as default setting
+```
+
+At this point, there should be 2 Storage accounts, 1 for storing images and 1 for storing log streams
+
+### Deploy App with ```App Service:```
+
+1. On Azure portal, navigate to ```Web App```, then hit ```Create```
+
+2. On the ```Create Web App``` page, fill in information as below, then click ```Create```:
+
+```
+Subscription: leave as default
+Resource group: azure-resourcegroup
+
+Name: ploratran
+Publish: Code
+Runtime stack: Python 3.7 or higher
+Operating System: Linux
+Region: West US 2
+
+Linux Plan (West US 2): leave as default
+Sku and size: Free F1 (1GB memory) 
+```
+3. Go back to ```Resource Group``` and visit the deployed website. If you see the site as picture below, the web app was deployed correctly: 
+
+<img src="screenshots/azure-webapp.png" width="600" height="350">
+
+4. Go back to ```App Service```, look at ```Deployment``` section on the left panel. Click on ```Deployment Center```
+
+5. Click on ```Settings```, and fill in information as picture below: 
+
+<img src="screenshots/deployment-center.png" width="600" height="350">
+
+6. After deploying the app, navigate to the url to make sure the code was successfully deployed onto Web App
 
 ## Getting Started:
 

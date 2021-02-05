@@ -14,9 +14,11 @@ app.config.from_object(Config)
 wsgi_app = app.wsgi_app
 
 # TODO: Add any logging levels and handlers with app.logger
+
 # Logging Level Doc: https://docs.python.org/3/library/logging.html
 app.logger.setLevel(logging.WARNING) # add log level from Warning and above
 
+# update the stream handler for the logger to only pay attention to warnings and above:
 streamHandler = logging.StreamHandler()
 streamHandler.setLevel(logging.WARNING)
 app.logger.addHandler(streamHandler) # add stream hanlder to app.logger object
