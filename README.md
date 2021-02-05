@@ -3,10 +3,12 @@
 
 This project is a Python web application built using Flask. The user can log in and out and create/edit articles. An article consists of a title, author, and body of text stored in an Azure SQL Server along with an image that is stored in Azure Blob Storage. You will also implement OAuth2 with Sign in with Microsoft using the `msal` library, along with app logging.
 
+## Demo: 
+![](demo.gif)
+
 ## Table of Contents:
 
 1. [Azure Portal](#azure-portal)
-2. [Getting started](#getting-started)
     * [Resource Group](#resource-group)
     * [Azure SQL Database](#azure-sql-database)
     * [Storage Account](#storage-account)
@@ -15,9 +17,11 @@ This project is a Python web application built using Flask. The user can log in 
     * [Azure Active Directory](#register-app-in-azure-active-directory)
     * [Monitoring and Logging in Azure](#monitoring-and-logging-in-azure)
     * [Deploy App with App Service](#deploy-app-with-app-service)
-2. [Dependencies](#dependencies)
-3. [Troubleshooting](#troubleshooting)
-1. [Udacity Requirements](#udacity-requirements)
+2. [Screenshots](#screenshots)
+3. [Getting started](#getting-started)
+4. [Dependencies](#dependencies)
+5. [Troubleshooting](#troubleshooting)
+6. [Udacity Requirements](#udacity-requirements)
 
 ## Azure Portal: 
 
@@ -89,6 +93,11 @@ Blob storage:
 
 5. Click ```Review + create``` > ```Create```
 
+6. Azure SQL Database should look like below: 
+
+<img src="screenshots/sql.png" width="600" height="350"> 
+
+<img src="screenshots/sql1.png" width="600" height="350"> 
 
 ### ```Blob Container:```
 
@@ -156,18 +165,6 @@ streamHandler = logging.StreamHandler()
 streamHandler.setLevel(logging.WARNING)
 app.logger.addHandler(streamHandler)
 ```
-3. Create a new ```Storage Account``` to store log streams in Azure portal. Go back to [Storage Account](#storage-account) section and fill with the following information: 
-
-```
-Subscription: Azure for Students
-Resource group: azure-resourcegroup
-Storage account name: loggin123
-Performance: Standard
-Account kind: StorageV2 (general purpose v2)
-Replication: leave as default setting
-```
-
-At this point, there should be 2 Storage accounts, 1 for storing images and 1 for storing log streams
 
 ### Deploy App with ```App Service:```
 
@@ -200,6 +197,64 @@ Sku and size: Free F1 (1GB memory)
 
 6. After deploying the app, navigate to the url to make sure the code was successfully deployed onto Web App
 
+### Log Streams:
+
+1. Create a new ```Storage Account``` to store log streams in Azure portal. Go back to [Storage Account](#storage-account) section and fill with the following information: 
+
+```
+Subscription: Azure for Students
+Resource group: azure-resourcegroup
+Storage account name: loggin123
+Performance: Standard
+Account kind: StorageV2 (general purpose v2)
+Replication: leave as default setting
+```
+
+At this point, there should be 2 Storage accounts, 1 for storing images and 1 for storing log streams.
+
+2. Go back to ```App Service```. Look on the left panel for ```Log streams```. Log Streams page will display all logs.
+
+3. Now, look on the left panel for ```Diagnosti settings (preview)``` > ```Add diagnostic setting```
+
+4. Select the following information as below:
+```
+Diagnostic setting name: login-signin-sigup
+log: AppServiceConsoleLogs
+Destination details: Archive to a storage account
+Location: West US 2
+Subscription: leave as default
+Storage account: logging123
+```
+
+
+## Screenshots:
+
+1. A screenshot from running the FlaskWebProject on Azure:
+
+<img src="screenshots/post.png" width="600" height="350"> 
+
+2. A screenshot from the Azure Portal showing all of the contents of the Resource Group. The resource group must (at least) contain the following:
+- Storage Account
+- SQL Server
+- SQL Database
+- Resources related to deploying the app
+
+<img src="screenshots/resources.png" width="600" height="350"> 
+
+3. A screenshot showing the created tables and one query of data from the initial scripts.
+
+<img src="screenshots/sql.png" width="600" height="350"> 
+
+4. A screenshot showing an example of blob endpoints for where images are sent for storage.
+
+<img src="screenshots/blob-endpoint.png" width="600" height="350"> 
+
+5. A screenshot of the redirect URIs related to Microsoft authentication.
+
+<img src="screenshots/redirecturl.png" width="600" height="350"> 
+
+6. A screenshot showing one potential form of logging with an "Invalid login attempt" and "admin logged in successfully", taken from the app's Log stream.
+
 ## Getting Started:
 
 1. Install the app locally by running:
@@ -210,12 +265,17 @@ $ python3 application.py
 
 2. Open browser and navigate to ```https://localhost:5555```
 
-3. Signin using ```Microsoft OAuth2 with MSAL```, the application home page should look like below: 
+3. Sign in using ```Microsoft OAuth2 with MSAL```, the application home page should look like below: 
 
+<img src="screenshots/sign-in.png" width="600" height="350"> 
 
 <img src="screenshots/home.png" width="600" height="350"> 
 
 <img src="screenshots/post.png" width="600" height="350"> 
+
+4. Sign out: 
+
+<img src="screenshots/sign-out.png" width="600" height="350"> 
 
 ## Dependencies
 
@@ -259,13 +319,13 @@ You are expected to do the following to complete this project:
 5. [x] Choose to use either a VM or App Service to deploy the FlaskWebProject to Azure. Complete the analysis template in `WRITEUP.md` (or include in the README) to compare the two options, as well as detail your reasoning behind choosing one or the other. Once you have made your choice, go through with deployment.
 6. [x] Add logging for whether users successfully or unsuccessfully logged in.
     - [x] This will require completing TODOs in `__init__.py`, as well as adding logging where desired in `views.py`.
-7. To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
+7. [x] To prove that the application in on Azure and working, go to the URL of your deployed app, log in using the credentials in this README, click the Create button, and create an article with the following data:
 	- Title: "Hello World!"
 	- Author: "Jane Doe"
 	- Body: "My name is Jane Doe and this is my first article!"
 	- Upload an image of your choice. Must be either a .png or .jpg.
-   After saving, click back on the article you created and provide a screenshot proving that it was created successfully. Please also make sure the URL is present in the screenshot.
-8. Log into the Azure Portal, go to your Resource Group, and provide a screenshot including all of the resources that were created to complete this project. (see sample screenshot in "example_images" folder)
+   [x] After saving, click back on the article you created and provide a screenshot proving that it was created successfully. Please also make sure the URL is present in the screenshot.
+8. [x] Log into the Azure Portal, go to your Resource Group, and provide a screenshot including all of the resources that were created to complete this project. (see sample screenshot in "example_images" folder)
 9. [x] Take a screenshot of the Redirect URIs entered for your registered app, related to the MS Login button.
 10. Take a screenshot of your logs (can be from the Log stream in Azure) showing logging from an attempt to sign in with an invalid login, as well as a valid login.
 

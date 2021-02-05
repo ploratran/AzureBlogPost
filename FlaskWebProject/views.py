@@ -75,7 +75,7 @@ def login():
 
             # Log warning when invalid user attemps to log in:
             log = "warning"
-            app.logger.warning("Invalid user attemps to login")
+            app.logger.warning("Invalid login attempt!")
 
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
