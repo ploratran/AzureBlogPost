@@ -93,11 +93,6 @@ Blob storage:
 
 5. Click ```Review + create``` > ```Create```
 
-6. Azure SQL Database should look like below: 
-
-<img src="screenshots/sql.png" width="600" height="350"> 
-
-<img src="screenshots/sql1.png" width="600" height="350"> 
 
 ### ```Blob Container:```
 
@@ -243,7 +238,7 @@ Storage account: logging123
 
 3. A screenshot showing the created tables and one query of data from the initial scripts.
 
-<img src="screenshots/sql.png" width="600" height="350"> 
+<img src="screenshots/sql1.png" width="600" height="350"> 
 
 4. A screenshot showing an example of blob endpoints for where images are sent for storage.
 
