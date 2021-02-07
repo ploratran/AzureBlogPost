@@ -74,8 +74,8 @@ def login():
             flash('Invalid username or password')
 
             # Log warning when invalid user attemps to log in:
-            log = "warning"
-            app.logger.warning("Invalid login attempt!")
+            log = "error"
+            app.logger.error("Invalid login attempt!")
 
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
