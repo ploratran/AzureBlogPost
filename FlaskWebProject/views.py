@@ -84,8 +84,8 @@ def login():
             next_page = url_for('home')
 
             # Log infor for successful login attempt:
-            log = "info"
-            app.logger.info("Successfully loggedi in!")
+            log = "error"
+            app.logger.error("Successfully logged in!")
 
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
