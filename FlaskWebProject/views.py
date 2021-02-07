@@ -62,9 +62,6 @@ def post(id):
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    # make a variable for log error:
-    log = ""
-
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = LoginForm()
@@ -74,7 +71,6 @@ def login():
             flash('Invalid username or password')
 
             # Log warning when invalid user attemps to log in:
-            log = "error"
             app.logger.error("Invalid login attempt!")
 
             return redirect(url_for('login'))
@@ -84,7 +80,6 @@ def login():
             next_page = url_for('home')
 
             # Log infor for successful login attempt:
-            log = "error"
             app.logger.error("Successfully logged in!")
 
         return redirect(next_page)

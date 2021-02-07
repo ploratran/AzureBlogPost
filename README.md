@@ -250,6 +250,8 @@ Storage account: logging123
 
 6. A screenshot showing one potential form of logging with an "Invalid login attempt" and "admin logged in successfully", taken from the app's Log stream.
 
+<img src="screenshots/log-stream.png" width="600" height="350"> 
+
 ## Getting Started:
 
 1. Install the app locally by running:
