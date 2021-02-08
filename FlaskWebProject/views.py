@@ -61,6 +61,7 @@ def post(id):
 # Add logging for whether users successfully or unsuccessfully logged in:
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    log = ""
 
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -71,6 +72,7 @@ def login():
             flash('Invalid username or password')
 
             # Log warning when invalid user attemps to log in:
+            log = "error"
             app.logger.error("Invalid login attempt!")
 
             return redirect(url_for('login'))
@@ -79,13 +81,14 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
 
-            # Log infor for successful login attempt:
-            app.logger.error("Successfully logged in!")
+        # Log infor for successful login attempt:
+        log = "error"
+        app.logger.error("Successfully logged in!")
 
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
-    return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
+    return render_template('login.html', title='Sign In', form=form, auth_url=auth_url, log=log)
 
 @app.route(Config.REDIRECT_PATH)  # Its absolute URL must match your app's redirect_uri set in AAD
 def authorized():
