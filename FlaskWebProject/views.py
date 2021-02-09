@@ -70,8 +70,7 @@ def login():
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
 
-            # Log warning when invalid user attemps to log in:
-            log = "error"
+            # IMPLEMENTATION: Log warning when invalid user attemps to log in:
             app.logger.error("Invalid login attempt!")
 
             return redirect(url_for('login'))
@@ -80,9 +79,8 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('home')
 
-        # Log infor for successful login attempt:
-        log = "error"
-        app.logger.error("Successfully logged in!")
+        # IMPLEMENTATION: Log for successful login attempt:
+        app.logger.info("Successfully logged in!")
 
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
