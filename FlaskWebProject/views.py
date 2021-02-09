@@ -61,7 +61,6 @@ def post(id):
 # Add logging for whether users successfully or unsuccessfully logged in:
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    log = ""
 
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -88,7 +87,7 @@ def login():
         return redirect(next_page)
     session["state"] = str(uuid.uuid4())
     auth_url = _build_auth_url(scopes=Config.SCOPE, state=session["state"])
-    return render_template('login.html', title='Sign In', form=form, auth_url=auth_url, log=log)
+    return render_template('login.html', title='Sign In', form=form, auth_url=auth_url)
 
 @app.route(Config.REDIRECT_PATH)  # Its absolute URL must match your app's redirect_uri set in AAD
 def authorized():

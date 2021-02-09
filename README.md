@@ -17,6 +17,7 @@ This project is a Python web application built using Flask. The user can log in 
     * [Azure Active Directory](#register-app-in-azure-active-directory)
     * [Monitoring and Logging in Azure](#monitoring-and-logging-in-azure)
     * [Deploy App with App Service](#deploy-app-with-app-service)
+    * [Store Log Streams](#store-log-streams)
 2. [Screenshots](#screenshots)
 3. [Getting started](#getting-started)
 4. [Dependencies](#dependencies)
@@ -192,7 +193,7 @@ Sku and size: Free F1 (1GB memory)
 
 6. After deploying the app, navigate to the url to make sure the code was successfully deployed onto Web App
 
-### Log Streams:
+### Store ```Log Streams:```
 
 1. Create a new ```Storage Account``` to store log streams in Azure portal. Go back to [Storage Account](#storage-account) section and fill with the following information: 
 
@@ -324,7 +325,7 @@ You are expected to do the following to complete this project:
    [x] After saving, click back on the article you created and provide a screenshot proving that it was created successfully. Please also make sure the URL is present in the screenshot.
 8. [x] Log into the Azure Portal, go to your Resource Group, and provide a screenshot including all of the resources that were created to complete this project. (see sample screenshot in "example_images" folder)
 9. [x] Take a screenshot of the Redirect URIs entered for your registered app, related to the MS Login button.
-10. Take a screenshot of your logs (can be from the Log stream in Azure) showing logging from an attempt to sign in with an invalid login, as well as a valid login.
+10. [x] Take a screenshot of your logs (can be from the Log stream in Azure) showing logging from an attempt to sign in with an invalid login, as well as a valid login.
 
 ### example_images Folder
 
